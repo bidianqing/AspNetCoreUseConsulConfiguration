@@ -18,7 +18,7 @@ namespace AspNetCoreUseConsulConfiguration.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.ConsulUrl = _configuration["Consul_Url"];
+            ViewBag.LogLevel = _configuration["Logging:LogLevel:Default"];
             ViewBag.ServiceName = _configData.ServiceName;
             return View();
         }
