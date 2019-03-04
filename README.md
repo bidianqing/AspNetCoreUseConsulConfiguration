@@ -7,7 +7,7 @@ consul.exe agent -dev
 
 
 ### 将配置文件复制到consul中
-![image](https://user-images.githubusercontent.com/12196280/53739971-0899e800-3ece-11e9-8e4e-bbda461fca76.png)
+![image](https://user-images.githubusercontent.com/12196280/53740023-2a936a80-3ece-11e9-9b2c-ee57b67b112a.png)
 
 
 ### 演示效果
