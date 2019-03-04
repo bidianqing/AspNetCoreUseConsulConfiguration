@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AspNetCoreUseConsulConfiguration.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
-using Winton.Extensions.Configuration.Consul;
 
 namespace AspNetCoreUseConsulConfiguration
 {
@@ -29,15 +27,7 @@ namespace AspNetCoreUseConsulConfiguration
             // 如果构造函数使用IOptions<> 则必须添加下面的注入
             //services.AddTransient(typeof(IOptions<>), typeof(OptionsManager<>));
 
-            services.Configure<ConfigData>(Configuration.GetSection("ConfigData"));
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
+            services.Configure<AppOptions>(Configuration.GetSection(nameof(AppOptions)));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -55,9 +45,7 @@ namespace AspNetCoreUseConsulConfiguration
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {

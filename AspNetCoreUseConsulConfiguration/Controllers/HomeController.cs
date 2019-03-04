@@ -1,4 +1,5 @@
 ﻿using AspNetCoreUseConsulConfiguration.Models;
+using AspNetCoreUseConsulConfiguration.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -9,17 +10,17 @@ namespace AspNetCoreUseConsulConfiguration.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly ConfigData _configData;
-        public HomeController(IConfiguration configuration,IOptionsMonitor<ConfigData> options)
+        private readonly AppOptions _appOptions;
+        public HomeController(IConfiguration configuration,IOptionsSnapshot<AppOptions> appOptionsAccessor)
         {
             _configuration = configuration;
-            _configData = options.CurrentValue;
+            _appOptions = appOptionsAccessor.Value;
         }
 
         public IActionResult Index()
         {
             ViewBag.LogLevel = _configuration["Logging:LogLevel:Default"];
-            ViewBag.ServiceName = _configData.ServiceName;
+            ViewBag.ServiceName = _appOptions.ServiceName;
             return View();
         }
 
