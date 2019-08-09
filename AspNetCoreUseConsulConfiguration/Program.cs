@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Reflection;
 using System.Threading;
 using Winton.Extensions.Configuration.Consul;
 
