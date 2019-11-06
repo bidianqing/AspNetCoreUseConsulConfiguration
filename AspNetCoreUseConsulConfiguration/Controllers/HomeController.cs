@@ -11,16 +11,19 @@ namespace AspNetCoreUseConsulConfiguration.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly AppOptions _appOptions;
-        public HomeController(IConfiguration configuration,IOptionsSnapshot<AppOptions> appOptionsAccessor)
+        private readonly EmailOptions _emailOptions;
+        public HomeController(IConfiguration configuration,IOptionsSnapshot<AppOptions> appOptionsAccessor, IOptionsSnapshot<EmailOptions> emailOptionsAccessor)
         {
             _configuration = configuration;
             _appOptions = appOptionsAccessor.Value;
+            _emailOptions = emailOptionsAccessor.Value;
         }
 
         public IActionResult Index()
         {
             ViewBag.LogLevel = _configuration["Logging:LogLevel:Default"];
             ViewBag.ServiceName = _appOptions.ServiceName;
+            ViewBag.From = _emailOptions.From;
             return View();
         }
 
@@ -35,11 +38,6 @@ namespace AspNetCoreUseConsulConfiguration.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 
