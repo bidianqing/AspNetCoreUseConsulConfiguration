@@ -22,6 +22,7 @@ namespace AspNetCoreUseConsulConfiguration
             services.AddControllersWithViews();
 
             services.Configure<AppOptions>(Configuration.GetSection(nameof(AppOptions)));
+
             services.Configure<EmailOptions>(Configuration.GetSection(nameof(EmailOptions)));
         }
 
