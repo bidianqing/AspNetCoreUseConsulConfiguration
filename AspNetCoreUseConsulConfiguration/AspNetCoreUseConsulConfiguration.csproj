@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Winton.Extensions.Configuration.Consul" Version="2.4.0" />
+    <PackageReference Include="Winton.Extensions.Configuration.Consul" Version="3.1.1" />
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties test_1json__JsonSchema="http://json.schemastore.org/appsettings" /></VisualStudio></ProjectExtensions>
 
 </Project>

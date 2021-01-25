@@ -24,21 +24,21 @@ namespace AspNetCoreUseConsulConfiguration
                     string consul_url = hostingContext.Configuration["Consul_Url"];
                     config.AddConsul(
                                 $"{env.ApplicationName}/appsettings.{env.EnvironmentName}.json",
-                                _cancellationTokenSource.Token,
                                 options =>
                                 {
                                     options.Optional = true;
                                     options.ReloadOnChange = true;
+                                    options.PollWaitTime = TimeSpan.FromSeconds(3);
                                     options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
                                     options.ConsulConfigurationOptions = cco => { cco.Address = new Uri(consul_url); };
                                 })
                            .AddConsul(
                                 $"{env.ApplicationName}/test.json",
-                                _cancellationTokenSource.Token,
                                 options =>
                                 {
                                     options.Optional = true;
                                     options.ReloadOnChange = true;
+                                    options.PollWaitTime = TimeSpan.FromSeconds(3);
                                     options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
                                     options.ConsulConfigurationOptions = cco => { cco.Address = new Uri(consul_url); };
                                 });
