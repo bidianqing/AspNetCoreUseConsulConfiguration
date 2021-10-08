@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Threading;
 using Winton.Extensions.Configuration.Consul;
 
 namespace AspNetCoreUseConsulConfiguration
 {
-    public class Program
+    public static class Program
     {
-        private static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
