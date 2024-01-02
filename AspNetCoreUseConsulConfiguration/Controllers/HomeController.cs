@@ -1,6 +1,5 @@
 ﻿using AspNetCoreUseConsulConfiguration.Options;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace AspNetCoreUseConsulConfiguration.Controllers
@@ -23,11 +22,11 @@ namespace AspNetCoreUseConsulConfiguration.Controllers
 
         public IActionResult Get()
         {
-            var logLevel = _configuration["Logging:LogLevel:Default"];
+            var name = _configuration["Name"];
             var serviceName = _appOptions.ServiceName;
             var from = _emailOptions.From;
 
-            return Ok($"{logLevel} == {serviceName} == {from}");
+            return Ok($"{name} == {serviceName} == {from}");
         }
     }
 }
