@@ -1,6 +1,6 @@
 # AspNetCoreUseConsulConfiguration
 
-### 以dev模式启动consul
+### 以dev模式启动consul，端口8500
 ```
 consul.exe agent -dev
 ```
