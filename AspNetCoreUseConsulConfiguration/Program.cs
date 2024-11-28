@@ -8,7 +8,12 @@ void ConsulConfigurationAction(IConsulConfigurationSource options)
     options.Optional = true;
     options.ReloadOnChange = true;
     options.PollWaitTime = TimeSpan.FromSeconds(3);
-    options.OnLoadException = exceptionContext => { exceptionContext.Ignore = true; };
+    options.OnLoadException = exceptionContext => { exceptionContext.Ignore = false; };
+    options.OnWatchException = (consulWatchExceptionContext) => 
+    {
+        Console.WriteLine(consulWatchExceptionContext.Exception.ToString());
+        return TimeSpan.FromSeconds(3);
+    };
     options.ConsulConfigurationOptions = cco => { cco.Address = new Uri(builder.Configuration["Consul_Url"]); };
 }
 builder.Configuration
@@ -16,7 +21,6 @@ builder.Configuration
     .AddConsul($"{builder.Environment.ApplicationName}/appsettings.test.json", ConsulConfigurationAction);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 builder.Services.Configure<AppOptions>(builder.Configuration.GetSection(nameof(AppOptions)));
