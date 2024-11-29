@@ -18,7 +18,11 @@ void ConsulConfigurationAction(IConsulConfigurationSource options)
         Console.WriteLine(consulWatchExceptionContext.Exception.ToString());
         return TimeSpan.FromSeconds(3);
     };
-    options.ConsulConfigurationOptions = cco => { cco.Address = new Uri(builder.Configuration["Consul_Url"]); };
+    options.ConsulConfigurationOptions = cco => 
+    { 
+        cco.Address = new Uri(builder.Configuration["Consul:Address"]);
+        cco.Token = builder.Configuration["Consul:Token"];
+    };
 }
 builder.Configuration
     .AddConsul($"{builder.Environment.ApplicationName}/appsettings.{builder.Environment.EnvironmentName}.json", ConsulConfigurationAction)
