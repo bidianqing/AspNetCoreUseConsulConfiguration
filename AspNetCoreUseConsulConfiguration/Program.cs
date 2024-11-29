@@ -8,7 +8,11 @@ void ConsulConfigurationAction(IConsulConfigurationSource options)
     options.Optional = true;
     options.ReloadOnChange = true;
     options.PollWaitTime = TimeSpan.FromSeconds(3);
-    options.OnLoadException = exceptionContext => { exceptionContext.Ignore = false; };
+    options.OnLoadException = consulLoadExceptionContext => 
+    {
+        Console.WriteLine(consulLoadExceptionContext.Exception.ToString());
+        consulLoadExceptionContext.Ignore = false;
+    };
     options.OnWatchException = (consulWatchExceptionContext) => 
     {
         Console.WriteLine(consulWatchExceptionContext.Exception.ToString());
